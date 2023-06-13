@@ -3,7 +3,7 @@ import { jwtVerify } from "jose";
 const PUBLIC_FILE = /\.(.*)$/;
 
 
-const verifyJWT = async (jwt) => {
+const verifyJWT = async (jwt: any) => {
     const { payload } = await jwtVerify(
         jwt,
         new TextEncoder().encode(process.env.JWT_SECRET)
@@ -12,7 +12,7 @@ const verifyJWT = async (jwt) => {
     return payload;
 };
 
-export default async function middleware(req, res) {
+async function mod(req: any, res: any) {
     const { pathname } = req.nextUrl;
     if (
         pathname.startsWith("/_next") ||
@@ -41,3 +41,5 @@ export default async function middleware(req, res) {
         return NextResponse.redirect(req.nextUrl);
     }
 }
+
+export default mod;
